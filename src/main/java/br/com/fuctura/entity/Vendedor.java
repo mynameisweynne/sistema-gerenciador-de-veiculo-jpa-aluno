@@ -11,22 +11,22 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_tipos")
-public class Tipo implements Serializable {
+@Table(name = "tb_vendedores")
+public class Vendedor implements Serializable {
 	@Serial
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int codigo;
-	private String descricao;
+	private String nome;
 
-	public Tipo() {
+	public Vendedor() {
 	}
 
-	public Tipo(int codigo, String descricao) {
+	public Vendedor(int codigo, String nome) {
 		this.codigo = codigo;
-		this.descricao = descricao;
+		this.nome = nome;
 	}
 
 	public int getCodigo() {
@@ -37,12 +37,12 @@ public class Tipo implements Serializable {
 		this.codigo = codigo;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	@Override
@@ -58,13 +58,13 @@ public class Tipo implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Tipo other = (Tipo) obj;
+		Vendedor other = (Vendedor) obj;
 		return codigo == other.codigo;
 	}
 
 	@Override
 	public String toString() {
-		return "Tipo [codigo=" + codigo + ", descricao=" + descricao + "]";
+		return "Vendedor [codigo=" + codigo + ", nome=" + nome + "]";
 	}
 
 }

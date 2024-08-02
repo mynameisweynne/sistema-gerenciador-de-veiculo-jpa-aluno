@@ -1,5 +1,7 @@
 package br.com.fuctura.entity;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -11,15 +13,17 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_veiculos")
-public class Veiculo {
+public class Veiculo implements Serializable {
+	@Serial
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int codigo;
-	@Column(length = 7) 
+	@Column(length = 7)
 	private String placa;
 	private String modelo;
-	@Column(length = 4) 
+	@Column(length = 4)
 	private int ano;
 	private double valor;
 
