@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,6 +21,8 @@ public class Tipo implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int codigo;
 	private String descricao;
+	@OneToOne(mappedBy = "tipo")
+	private Veiculo veiculo;
 
 	public Tipo() {
 	}
@@ -43,6 +46,14 @@ public class Tipo implements Serializable {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public Veiculo getVeiculo() {
+		return veiculo;
+	}
+
+	public void setVeiculo(Veiculo veiculo) {
+		this.veiculo = veiculo;
 	}
 
 	@Override

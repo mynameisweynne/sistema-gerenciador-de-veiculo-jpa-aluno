@@ -4,11 +4,13 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,16 +28,19 @@ public class Veiculo implements Serializable {
 	@Column(length = 4)
 	private int ano;
 	private double valor;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Tipo tipo;
 
 	public Veiculo() {
 	}
 
-	public Veiculo(int codigo, String placa, String modelo, int ano, double valor) {
+	public Veiculo(int codigo, String placa, String modelo, int ano, double valor, Tipo tipo) {
 		this.codigo = codigo;
 		this.placa = placa;
 		this.modelo = modelo;
 		this.ano = ano;
 		this.valor = valor;
+		this.tipo = tipo;
 	}
 
 	public int getCodigo() {
@@ -78,6 +83,14 @@ public class Veiculo implements Serializable {
 		this.valor = valor;
 	}
 
+	public Tipo getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Tipo tipo) {
+		this.tipo = tipo;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(codigo);
@@ -97,13 +110,8 @@ public class Veiculo implements Serializable {
 
 	@Override
 	public String toString() {
-		return "\nVeiculo: " +
-				"\nCódigo = " + codigo + 
-				"\nPlaca = " + placa +
-				"\nModelo = " + modelo +
-				"\nAno = " + ano +
-				"\nValor = " + valor +
-				"\n";
+		return "\nVeiculo: " + "\nCódigo = " + codigo + "\nPlaca = " + placa + "\nModelo = " + modelo + "\nAno = " + ano
+				+ "\nValor = " + valor + "\nDescrição = " + tipo.getDescricao() + "\n";
 	}
 
 }

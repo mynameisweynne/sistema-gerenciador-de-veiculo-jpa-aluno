@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import br.com.fuctura.dao.VeiculoDAO;
 import br.com.fuctura.dao.factory.DAOFactory;
+import br.com.fuctura.entity.Tipo;
 import br.com.fuctura.entity.Veiculo;
 
 public class App {
@@ -131,6 +132,17 @@ public class App {
 			veiculo.setValor(novoValor);
 		}
 
+		System.out.print("Digite a nova descrição do tipo (ou Enter para manter a atual): ");
+		String novaDescricaoTipo = sc.nextLine();
+		if (!novaDescricaoTipo.isEmpty()) {
+			if (veiculo.getTipo() != null) {
+				veiculo.getTipo().setDescricao(novaDescricaoTipo);
+			} else {
+				Tipo novoTipo = new Tipo(0, novaDescricaoTipo);
+				veiculo.setTipo(novoTipo);
+			}
+		}
+
 		try {
 			veiculoDAO.update(veiculo);
 			System.out.println("Veículo atualizado com sucesso!");
@@ -150,8 +162,11 @@ public class App {
 		System.out.print("Digite o valor: ");
 		double valor = sc.nextDouble();
 		sc.nextLine();
+		System.out.print("Digite a descrição do tipo do veículo: ");
+		String descricaoTipo = sc.nextLine();
+		Tipo tipo = new Tipo(0, descricaoTipo);
 
-		Veiculo veiculo = new Veiculo(0, placa, modelo, ano, valor);
+		Veiculo veiculo = new Veiculo(0, placa, modelo, ano, valor, tipo);
 		veiculoDAO.insert(veiculo);
 		System.out.println("Veículo cadastrado com sucesso!");
 	}
